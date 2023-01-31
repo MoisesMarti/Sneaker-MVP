@@ -1,14 +1,33 @@
-// access the express library by requring express 
-const {select} = require('cheerio-select')
+//access the express library by requring express 
 const express = require('express')
-// use express library and putting it in var
+//use express library and putting it in var
 const app = express()
-// env var 
+//env var 
 const PORT = process.env.PORT || 3000
-// middleware that intrercepts req and spits out readable data
+//middleware that intrercepts req and spits out readable data
 app.use(express.json())
 //requiring the Pool data from the db.js file
 const client = require('./db')
+
+
+// import express from "express";
+// import postgres from "postgres";
+// //TODO: Uncomment the following two lines.
+// import dotenv from "dotenv";
+// dotenv.config();
+// const PORT = process.env.PORT || 3000
+// const dataBase = process.env.DATABASE_URL
+// const app = express();
+// const sql = postgres(dataBase);
+
+
+// app.get("/my_sneakers", (_, res) => {
+//   sql`SELECT * FROM user_Table`.then((data) => {
+//     res.json(data);
+//   });
+//});
+
+
 
 app.get('/my_sneakers', async (req,res)=>{
 try {
@@ -18,7 +37,9 @@ try {
 } catch (error) {
   res.status(500)
 }
-})
+ })
+
+
 app.get('/my_sneakers/:id', async (req, res) => {
   try {
     const result = await client.query(`SELECT * FROM user_Table WHERE  persons_id = ${req.params.id}`, (err, result) => {
@@ -60,6 +81,7 @@ app.delete('/my_sneakers/:id', async (req, res) => {
   }
 });
  
+
 app.listen(PORT, () => {
   console.log(`listening on Port ${PORT}`);
 });
