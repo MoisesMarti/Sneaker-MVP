@@ -1,5 +1,5 @@
 // access the express library by requring express 
-const { select } = require('cheerio-select')
+const {select} = require('cheerio-select')
 const express = require('express')
 // use express library and putting it in var
 const app = express()
@@ -60,10 +60,6 @@ app.delete('/my_sneakers/:id', async (req, res) => {
   }
 });
  
-
-  
-
-
 app.listen(PORT, () => {
   console.log(`listening on Port ${PORT}`);
 });
