@@ -4,9 +4,53 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  
+  <div id="main">
+    <div>
+      <h1> Sneakers Gallery</h1>
+    </div>
+  </div>
+  <header>
+    <h2>SNEAKER LIST</h2>
+    <form id="new-task-form">
+      <input 
+      type="text"
+      id="new-list-input"
+      placeholder="Save Sneaker?" />
+      <input 
+      type="submit" 
+      id="new-shoe-submit"
+      value="add to list" />
+    </form>
+  </header>
+  <main>
+      <div id="image-container">
+        <h1>my sqare image</h1>
+
+      </div>
+      <section class="shoe list">
+          <h2>list</h2>
+
+            <div id="lists">
+              <div class="list">
+                <input 
+                  type="text"
+                  class="text"
+                  value="My Shoe List"
+                  readonly
+                />
+              </div>
+              <div class="actions">
+                <button class="edit">edit</button>
+                 <button class="delete">delete</button>
+              </div>
+          </div>
+          
+      </section>
+    </main>
+    <SCript src="clientside.js"></SCript>
+  </div>  
 </body>
 </html>

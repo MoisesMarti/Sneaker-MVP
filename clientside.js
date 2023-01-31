@@ -1,10 +1,22 @@
+
 const SneaksAPI = require('sneaks-api');
 const sneaks = new SneaksAPI();
 
 //getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
-sneaks.getProducts("Jordan 1", 1, function(err, products){
+sneaks.getProducts("Jordan 1", 15, function(err, products){
     console.log(products)
 })
+
+
+
+
+
+
+
+
+
+
+
 
 //Product object includes styleID where you input it in the getProductPrices function
 //getProductPrices(styleID, callback) takes in a style ID and returns sneaker info including a price map and more images of the product
@@ -15,4 +27,3 @@ sneaks.getProducts("Jordan 1", 1, function(err, products){
 // sneaks.getMostPopular(10, function(err, products){
 //     console.log(products)
 // })
-

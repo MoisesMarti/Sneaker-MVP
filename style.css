@@ -1,0 +1,55 @@
+body {
+  margin: 0%;
+  height: 100%;
+  width: 100%;
+
+}
+
+html {
+  display: flex;
+  background-color: cornsilk;
+  height: 100%;
+  width: 100%;
+}
+h2 {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: start;
+
+}
+
+header {
+margin-bottom: 10rem;
+
+}
+
+button {
+ display: flex;
+}
+
+#main {
+display: flex;
+justify-content: center;
+margin: 0;
+}
+
+
+#imagebox {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+margin: 0;
+margin-top: 10rem;
+}
+
+h1 {
+ margin-bottom: 10rem;
+}
+
+#image-container {
+display: flex;
+justify-content: center;
+}
+
+.shoelist{
+}
