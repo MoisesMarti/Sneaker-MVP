@@ -1,32 +1,15 @@
 //access the express library by requring express 
 const express = require('express')
+const cors = require('cors')
 //use express library and putting it in var
 const app = express()
 //env var 
 const PORT = process.env.PORT || 3000
 //middleware that intrercepts req and spits out readable data
+app.use(cors())
 app.use(express.json())
 //requiring the Pool data from the db.js file
 const client = require('./db')
-
-
-// import express from "express";
-// import postgres from "postgres";
-// //TODO: Uncomment the following two lines.
-// import dotenv from "dotenv";
-// dotenv.config();
-// const PORT = process.env.PORT || 3000
-// const dataBase = process.env.DATABASE_URL
-// const app = express();
-// const sql = postgres(dataBase);
-
-
-// app.get("/my_sneakers", (_, res) => {
-//   sql`SELECT * FROM user_Table`.then((data) => {
-//     res.json(data);
-//   });
-//});
-
 
 
 app.get('/my_sneakers', async (req,res)=>{
@@ -56,7 +39,7 @@ app.post('/my_sneakers', async (req,res) =>{
   try {
     const {name, size} =req.body
     const {rows} = await client.query('INSERT INTO user_Table (name,size) VALUES ($1,$2)',[name,size])
-    res.send('SUCCSESFUL')
+    res.send(rows)
   } catch (error) {
     
   }
