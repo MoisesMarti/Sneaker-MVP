@@ -108,7 +108,7 @@
 }
 
 
-input[name="input-field"] {
+#input{
   width: 60%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -118,5 +118,10 @@ input[name="input-field"] {
   margin-top: 80px;
 }
 
-.input {
+.date{
+  font-size: 30px;
+}
+
+.user-name {
+  font-size: 30px;
 }
