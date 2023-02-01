@@ -1,4 +1,5 @@
 //access the express library by requring express 
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 //use express library and putting it in var
@@ -12,9 +13,20 @@ app.use(express.json())
 const client = require('./db')
 //app.use(express.static('Sneaker-MVP'))
 
+
+const { Pool } = require("pg");
+
+console.log('working')
+const databaseconfig = {
+   constring: process.env.DATABASE_URL
+}
+const pool = new Pool (databaseconfig)
+
+
+
 app.get('/my_sneakers', async (req,res)=>{
 try {
-  await client.query('SELECT * FROM user_Table',(err,result) =>{
+  await client.query('SELECT * FROM user_table',(err,result) =>{
     res.send(result.rows)
   } )
 } catch (error) {
@@ -25,8 +37,7 @@ try {
 
 app.get('/my_sneakers/:id', async (req, res) => {
   try {
-    const result = await client.query(`SELECT * FROM user_Table WHERE  persons_id = ${req.params.id}`, (err, result) => {
-      if (err) throw err;
+    const result = await client.query(`SELECT * FROM user_table WHERE  persons_id = ${req.params.id}`, (err, result) => {
       res.json(result.rows);
     });
   } catch (error) {
@@ -37,19 +48,19 @@ app.get('/my_sneakers/:id', async (req, res) => {
 
 app.post('/my_sneakers', async (req,res) =>{
   try {
-    const {name, size} =req.body
-    const {rows} = await client.query('INSERT INTO user_Table (name,size) VALUES ($1,$2)',[name,size])
+    const {notes} =req.body
+    const {rows} = await pool.query('INSERT INTO user_table (notes) VALUES ($1)',[notes])
     res.send(rows)
   } catch (error) {
-    
+    res.send(error.message)
   }
 })
 
 app.put('/my_sneakers/:id', async (req, res) => {
   try {
-  const {name, size} = req.body;
-  const result = await client.query(`UPDATE user_Table SET name = $1, size = $2 WHERE persons_id = ${req.params.id}`, [name, size]);
-  res.status(200).send("Sneaker updated successfully!");
+  const {notes} = req.body;
+  const result = await client.query(`UPDATE user_table SET notes = $1, WHERE persons_id = ${req.params.id}`, [notes]);
+  res.status(200).send("NOTES updated successfully!");
   } catch (error) {
   res.status(500);
   }
@@ -57,8 +68,8 @@ app.put('/my_sneakers/:id', async (req, res) => {
 
 app.delete('/my_sneakers/:id', async (req, res) => {
   try {
-    const result = await client.query(`DELETE FROM user_Table WHERE persons_id = ${req.params.id}`);
-    res.status(200).send("Sneaker deleted successfully!");
+    const result = await client.query(`DELETE FROM user_table WHERE persons_id = ${req.params.id}`);
+    res.status(200).send("NOTES deleted successfully!");
   } catch (error) {
     res.status(500);
   }

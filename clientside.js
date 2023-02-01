@@ -1,43 +1,103 @@
-console.log('working')
 
-const getBtn = document.getElementById('get');
+
+
+
+//==============================get===================================
+
+const getBtn = document.getElementById('GET');
 getBtn.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
     const response = await fetch('https://mysneakers.onrender.com/my_sneakers');
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
+
+    const container = document.querySelector('.text-container');
+    data.forEach((item) => {
+      const div = document.createElement('div');
+      div.innerHTML = item.notes;
+      container.append(div);
+    });
   } catch (error) {
     console.error('An error occurred:', error);
   }
 });
 
 
+//===============================post======================================
+
+// const createNewDinoType = async (dinoType) => {
+//   const options = {
+//       method: 'POST',
+//       headers: {
+//           'Accept': 'application/json',
+//           'content-type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//           "type": `${dinoType}`
+//       })
+//   }
+
+//   const response = await fetch(`${apiURL}/dino/types`, options)
+//   const sqlQuery = await response.json()
+// }
+
+// const createDinoTypeBtn = document.getElementById('createDinoTypeBtn')
+// createDinoTypeBtn.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     const dinoTypeName = document.getElementById('dinoTypeName')    
+//     createNewDinoType(dinoTypeName.value)
+// });
 
 
 const post = document.querySelector('#post');
-console.log(post)         
-if (post) {
+        
+
+//   post.addEventListener('click', async (e) => {
+//     e.preventDefault()
+//     const notes = document.getElementById('input').value
+//      console.log(notes)
+
+//     try {
+//       const response = await fetch('https://mysneakers.onrender.com/my_sneakers', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             notes
+//           })
+//         })   
+//        // .then((response) => response.json())
+//        .then((response) => {
+//         console.log(response)
+//        })
+//         console.log('post worked')
+//       } catch (err) {
+//       // console.log(err.message)
+//     }
+//   });    
+
   post.addEventListener('click', async (e) => {
     e.preventDefault()
-    const inputForm = document.getElementById('input').value
+    const notes = document.getElementById('input').value
+     console.log(notes)
 
-    try {
-      const response = await fetch('https://mysneakers.onrender.com/my_sneakers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            inputForm
-        })
-      })    
-      .then((response) => response.json())
-    } catch (err) {
-      // console.log(err.message)
+    try{
+      const response = await fetch ('https://mysneakers.onrender.com/my_sneakers',{
+        method: "POST",
+        headers: {"Content-Type": "application/json; charset=utf-8"},
+        body: JSON.stringify(notes)
+      })
+    .then((response)=>response.json());
+      console.log(err.message);
+    }catch (err){
+      console.log(err.message)
     }
-  });    
-}
+  })
+
+
+//============================delete============================
 
 const deleteBtn = document.getElementById('delete');
 deleteBtn.addEventListener('click', async (e) => {
@@ -61,6 +121,35 @@ deleteBtn.addEventListener('click', async (e) => {
   }
 });
 
+
+//=================================update==============================
+
+
+const updateBtn = document.getElementById('update');
+updateBtn.addEventListener('click', async(e) => {
+  e.preventDefault();
+  let id = 54;
+  try {
+    const response = await fetch(`https://mysneakers.onrender.com/my_sneakers/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.ok) {
+      if (response.headers.get('Content-Type').includes('application/json')) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.log(await response.text());
+      }
+    } else {
+      throw new Error('Something went wrong with the update request');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 
 

@@ -1,13 +1,12 @@
-DROP TABLE IF EXISTS user_Table;
+--DROP TABLE IF EXISTS user_table;
 -- DROP TABLE IF EXISTS sneakers_Table;
 
-CREATE TABLE user_Table (
-    persons_id serial PRIMARY KEY,
-    name VARCHAR,
-    size INTEGER
+CREATE TABLE user_table (
+    persons_id serial,
+    notes text
 );
-INSERT INTO user_Table (name,size) VALUES ('Moises',9);
-INSERT INTO user_Table (name,size) VALUES ('Caleb',13);
+INSERT INTO user_table (notes) VALUES ('Moises');
+--INSERT INTO user_table (notes) VALUES ('Caleb');
 
 
 -- CREATE TABLE sneakers_Table (
