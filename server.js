@@ -10,7 +10,7 @@ app.use(cors())
 app.use(express.json())
 //requiring the Pool data from the db.js file
 const client = require('./db')
-
+//app.use(express.static('Sneaker-MVP'))
 
 app.get('/my_sneakers', async (req,res)=>{
 try {

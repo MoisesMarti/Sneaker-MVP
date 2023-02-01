@@ -1,70 +1,68 @@
 console.log('working')
 
+const getBtn = document.getElementById('get');
+getBtn.addEventListener('click', async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch('https://mysneakers.onrender.com/my_sneakers');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+});
 
-//   async function getData() {
-//     try {
-//       const response = await fetch('https://mysneakers.onrender.com/my_sneakers');
-//       const data = await response.json();
-//       // do something with the data here
-//     } catch (error) {
-//       console.error('An error occurred:', error);
-//     }
-//   }
-  
-//   const get = document.querySelector()
 
-const create = document.getElementById('post');
-console.log(create)
-create.addEventListener('click',async(e)=> {
-e.preventDefault()
-  const inputForm = document.getElementById('input').value
+
+
+const post = document.querySelector('#post');
+console.log(post)         
+if (post) {
+  post.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const inputForm = document.getElementById('input').value
 
     try {
       const response = await fetch('https://mysneakers.onrender.com/my_sneakers', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name:  'darwin',
-            size:   10
+            inputForm
         })
-      })
+      })    
       .then((response) => response.json())
     } catch (err) {
-      //console.log(err.message)
+      // console.log(err.message)
     }
-  });
+  });    
+}
 
-
-
-
-const deleteBtn = document.getElementById('delete')
-deleteBtn.addEventListener('click', async (e)=> {
-    e.preventDefault()
-
-    async function deleteData(id) {
-        try {
-            const response = await fetch(`https://mysneakers.onrender.com/my_sneakers/${id}`, {
-                method: 'DELETE',
-                mode: 'no-cors'
-            });
-            if (response.ok) {
-                console.log('Data deleted successfully');
-                // refresh the UI or refetch the data
-            } else {
-                console.error('An error occurred while deleting the data');
-            }
-            
-        } catch (error) {
-            console.error('An error occurred:', error);
-        }
+const deleteBtn = document.getElementById('delete');
+deleteBtn.addEventListener('click', async (e) => {
+  e.preventDefault();
+  id = 11;
+  try {
+    const response = await fetch(`https://mysneakers.onrender.com/my_sneakers/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.ok) {
+      console.log('Data deleted successfully');
+      // refresh the UI or refetch the data
+    } else {
+      console.error('An error occurred while deleting the data');
     }
-    
-})
-  
-  
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+});
+
+
+
 
 
 
