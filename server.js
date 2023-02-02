@@ -1,34 +1,42 @@
-//access the express library by requring express 
+
+const path = require('path')
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-//use express library and putting it in var
 const app = express()
-//env var 
 const PORT = process.env.PORT || 3000
-//middleware that intrercepts req and spits out readable data
 app.use(cors())
 app.use(express.json())
-//requiring the Pool data from the db.js file
-const client = require('./db')
-//app.use(express.static('Sneaker-MVP'))
+app.use(express.static(path.join(process.cwd(), 'public')))
+
+const {JSDOM} = require('jsdom')
+const $ = require('jquery')
+const fs = require('fs')
+const dotenv = require('dotenv')
+const postgres = require('postgres')
 
 
-const { Pool } = require("pg");
+dotenv.config()
 
-console.log('working')
-const databaseconfig = {
-   constring: process.env.DATABASE_URL
+const sql = postgres(process.env.DATABASE_URL)
+
+
+app.get('/', async (req,res)=>{
+try {
+  res.sendFile(path.join(process.cwd(), "client.html"))
+} catch (error) {
+  throw error
 }
-const pool = new Pool (databaseconfig)
-
+})
 
 
 app.get('/my_sneakers', async (req,res)=>{
 try {
-  await client.query('SELECT * FROM user_table',(err,result) =>{
-    res.send(result.rows)
-  } )
+  const notes = await sql`
+  SELECT notes FROM user_table
+  `
+  console.log(notes)
+  res.json(notes)
 } catch (error) {
   res.status(500)
 }
@@ -48,9 +56,13 @@ app.get('/my_sneakers/:id', async (req, res) => {
 
 app.post('/my_sneakers', async (req,res) =>{
   try {
+    console.log(req.body)
     const {notes} =req.body
-    const {rows} = await pool.query('INSERT INTO user_table (notes) VALUES ($1)',[notes])
-    res.send(rows)
+    await sql`
+    INSERT INTO user_table (notes)
+    VALUES (${notes})
+    `
+    console.log('hit')
   } catch (error) {
     res.send(error.message)
   }
@@ -78,4 +90,4 @@ app.delete('/my_sneakers/:id', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`listening on Port ${PORT}`);
-});
+}); 

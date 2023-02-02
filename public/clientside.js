@@ -8,14 +8,19 @@ const getBtn = document.getElementById('GET');
 getBtn.addEventListener('click', async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch('https://mysneakers.onrender.com/my_sneakers');
+    const response = await fetch('/my_sneakers');
     const data = await response.json();
     //console.log(data);
 
-    const container = document.querySelector('.text-container');
+    const container = document.querySelector('#text-container');
+    container.innerHTML = 'LIST'
     data.forEach((item) => {
       const div = document.createElement('div');
-      div.innerHTML = item.notes;
+      const btn = document.createElement('button');
+      btn.className = 'delete'
+      btn.innerText = 'Delete'
+      div.append(btn)
+      div.innerText = item.notes;
       container.append(div);
     });
   } catch (error) {
@@ -23,74 +28,34 @@ getBtn.addEventListener('click', async (e) => {
   }
 });
 
-
 //===============================post======================================
 
-// const createNewDinoType = async (dinoType) => {
-//   const options = {
-//       method: 'POST',
-//       headers: {
-//           'Accept': 'application/json',
-//           'content-type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//           "type": `${dinoType}`
-//       })
-//   }
-
-//   const response = await fetch(`${apiURL}/dino/types`, options)
-//   const sqlQuery = await response.json()
-// }
-
-// const createDinoTypeBtn = document.getElementById('createDinoTypeBtn')
-// createDinoTypeBtn.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     const dinoTypeName = document.getElementById('dinoTypeName')    
-//     createNewDinoType(dinoTypeName.value)
-// });
 
 
-const post = document.querySelector('#post');
         
-
-//   post.addEventListener('click', async (e) => {
-//     e.preventDefault()
-//     const notes = document.getElementById('input').value
-//      console.log(notes)
-
-//     try {
-//       const response = await fetch('https://mysneakers.onrender.com/my_sneakers', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             notes
-//           })
-//         })   
-//        // .then((response) => response.json())
-//        .then((response) => {
-//         console.log(response)
-//        })
-//         console.log('post worked')
-//       } catch (err) {
-//       // console.log(err.message)
-//     }
-//   });    
+const post = document.querySelector('#post');
 
   post.addEventListener('click', async (e) => {
-    e.preventDefault()
     const notes = document.getElementById('input').value
-     console.log(notes)
+    const note = {
+      notes: notes
+    }
+    const container = document.querySelector('#text-container');
+      const div = document.createElement('div');
+      div.innerHTML = notes;
+      container.append(div);
 
     try{
-      const response = await fetch ('https://mysneakers.onrender.com/my_sneakers',{
+      await fetch ('/my_sneakers', {
         method: "POST",
         headers: {"Content-Type": "application/json; charset=utf-8"},
-        body: JSON.stringify(notes)
+        body: JSON.stringify(note)
       })
-    .then((response)=>response.json());
-      console.log(err.message);
+    .then((response)=>response.json())
+    .then((data)=>{
+      console.log("Success: ", data)
+    })
+      
     }catch (err){
       console.log(err.message)
     }
@@ -99,12 +64,13 @@ const post = document.querySelector('#post');
 
 //============================delete============================
 
+
 const deleteBtn = document.getElementById('delete');
+
 deleteBtn.addEventListener('click', async (e) => {
-  e.preventDefault();
-  id = 11;
+  
   try {
-    const response = await fetch(`https://mysneakers.onrender.com/my_sneakers/${id}`, {
+    const response = await fetch(`/my_sneakers/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -112,7 +78,6 @@ deleteBtn.addEventListener('click', async (e) => {
     });
     if (response.ok) {
       console.log('Data deleted successfully');
-      // refresh the UI or refetch the data
     } else {
       console.error('An error occurred while deleting the data');
     }
@@ -130,7 +95,7 @@ updateBtn.addEventListener('click', async(e) => {
   e.preventDefault();
   let id = 54;
   try {
-    const response = await fetch(`https://mysneakers.onrender.com/my_sneakers/${id}`, {
+    const response = await fetch(`/my_sneakers/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
