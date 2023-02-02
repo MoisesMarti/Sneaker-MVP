@@ -1,4 +1,4 @@
---DROP TABLE IF EXISTS user_table;
+DROP TABLE IF EXISTS user_table;
 -- DROP TABLE IF EXISTS sneakers_Table;
 
 CREATE TABLE user_table (

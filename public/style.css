@@ -8,7 +8,7 @@
 
 .menu-container {
   color: #fff;
-  background-color: #5995DA;  /* Blue */
+  background-color: #599be7;  /* Blue */
   padding: 20px 0;
 }
 
@@ -27,7 +27,6 @@
 
 
 .links {
-
   display: flex;
   justify-content: flex-end;
 }

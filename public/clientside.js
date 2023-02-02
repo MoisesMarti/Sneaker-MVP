@@ -58,11 +58,10 @@ const createTodoList = async (data) => {
   listHeader.classList.add('textbox')
   listHeader.innerText = 'LIST'
   container.appendChild(listHeader)
-
-  data.forEach((e) => {
+  for (obj of data) {
     const todoItemContainer = document.createElement('div')
     todoItemContainer.classList.add('todo-item-container')
-    todoItemContainer.setAttribute('id', e.persons_id)
+    todoItemContainer.setAttribute('id', obj.persons_id)
     container.appendChild(todoItemContainer)
 
     const updateBtn = document.createElement('button');
@@ -76,7 +75,7 @@ const createTodoList = async (data) => {
     const todoItemName = document.createElement('div');
     todoItemName.classList.add('todo-item-name')
     todoItemName.setAttribute('contentEditable', 'true')
-    todoItemName.innerText = e.notes;
+    todoItemName.innerText = obj.notes;
     todoItemContainer.append(todoItemName);
 
     const deleteBtn = document.createElement('button');
@@ -86,7 +85,7 @@ const createTodoList = async (data) => {
       deleteTodo(e.currentTarget.parentElement.id)           
     });
     todoItemContainer.append(deleteBtn)
-  });
+  }
 }
 
 //===============================Get======================================
