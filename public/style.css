@@ -1,5 +1,6 @@
 
 * {
+  font-family: 'DM Serif Display', serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -37,7 +38,7 @@
 
 .header-container {
   color: #f4f7fb;
-  background-color: #f8fafb;
+  background-color: #edf2f5;
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -54,6 +55,14 @@
   justify-content:center;
 }
 
+.textbox {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 50px;
+  width: 100%;
+  border-bottom: 5px ridge whitesmoke;
+}
+
 .text-container {
   display: flex;
   flex-direction: column;
@@ -61,9 +70,60 @@
   height: 900px;
   width: 1100px;
   margin-top: 100px;
-  background-color: #5995dae6;
+  background-color: #5995DA;
   font-size: 35px;
+  border-radius: 25px;
+}
+
+.todo-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 900px;
+  height: 60px;
+  margin-bottom: 30px;
+  /* border: 1px solid black; */
+}
+
+.todo-item-name {
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  padding-top: 10px;
+  width: 800px;
+  margin: 0 50px;
+  color: rgb(0, 0, 0);
   
+  /* border: 1px solid black; */
+}
+
+.update {
+  font-size: 22px;
+  padding: 0 30px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  /* border: 1px solid black; */
+}
+
+.update:hover {
+  background-color: forestgreen;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.delete {
+  font-size: 22px;
+  padding: 0 30px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  /* border: 1px solid black; */
+}
+
+.delete:hover {
+  background-color: red;
+  color: whitesmoke;
+  cursor: pointer;
 }
 
 .search-bar {
@@ -97,28 +157,35 @@
   width: 15rem;
   font-size: 25px;
 }
-#get{
+
+#post:hover{
+  background-color: goldenrod;
+  color: whitesmoke;
+}
+
+#GET{
   height: 3rem;
   margin-top: 10px;
   width: 15rem;
   font-size: 25px;
 }
+#GET:hover{
+  background-color: blue;
+  color: whitesmoke;
+}
 
 .textboox {
-
   height:10rem;
   margin-top: 1rem;
   display: flex;
   justify-content: center;
   font-size: 44px;
-  color: rgb(233, 236, 239);
-
-
+  color: whitesmoke;
 }
 
 
 #input{
-  width: 60%;
+  width: 80%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -126,12 +193,16 @@
   border-radius: 4px;
   margin-top: 80px;
   font-size: 45px;
+  border-color: black;
 }
 
 .date{
-  font-size: 30px;
+  font-size: 33px;
 }
 
 .user-name {
-  font-size: 30px;
+  font-size: 33px;
 }
+
+
+
